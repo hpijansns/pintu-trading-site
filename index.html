@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pintu Trade | Ultra Premium Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #020617; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .glass { background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(51, 65, 85, 1); backdrop-filter: blur(10px); }
+        .tab-content { display: none; }
+        .active-tab { display: block; }
+    </style>
+</head>
+<body>
+
+    <nav class="glass flex justify-between items-center p-4 sticky top-0 z-50">
+        <h1 class="text-2xl font-black text-blue-500">PINTU-TRADE</h1>
+        <div class="flex gap-4">
+            <button onclick="showPage('trading')" class="hover:text-blue-400">Trade</button>
+            <button onclick="showPage('wallet')" class="hover:text-blue-400">Wallet</button>
+            <button onclick="showPage('login')" class="bg-blue-600 px-4 py-1 rounded">Login</button>
+        </div>
+    </nav>
+
+    <div id="trading" class="tab-content active-tab p-4">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            <div class="lg:col-span-3 glass rounded-xl h-[600px] p-2">
+                <div id="tradingview_chart" class="h-full"></div>
+            </div>
+            <div class="glass rounded-xl p-6">
+                <h3 class="text-xl font-bold mb-4">Quick Trade</h3>
+                <input type="number" placeholder="Amount USDT" class="w-full bg-slate-900 border border-slate-700 p-3 rounded mb-4 outline-none">
+                <button class="w-full bg-green-600 py-3 rounded-lg font-bold mb-2">BUY BTC</button>
+                <button class="w-full bg-red-600 py-3 rounded-lg font-bold">SELL BTC</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="wallet" class="tab-content p-8">
+        <div class="max-w-4xl mx-auto glass rounded-2xl p-8">
+            <h2 class="text-3xl font-bold mb-6">Your Wallet</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-blue-600/20 border border-blue-500 p-6 rounded-xl">
+                    <p>Total Balance</p>
+                    <h3 class="text-4xl font-bold">$12,450.00</h3>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-xl">
+                    <p>P&L (24h)</p>
+                    <h3 class="text-4xl font-bold text-green-400">+$450.20</h3>
+                </div>
+            </div>
+            <button class="mt-8 bg-white text-black font-bold px-8 py-3 rounded-lg">Withdraw Money</button>
+        </div>
+    </div>
+
+    <div id="login" class="tab-content p-8">
+        <div class="max-w-md mx-auto glass rounded-2xl p-8 mt-10">
+            <h2 class="text-2xl font-bold mb-6 text-center">Login to Trade</h2>
+            <input type="email" placeholder="Email" class="w-full bg-slate-900 border border-slate-700 p-3 rounded mb-4">
+            <input type="password" placeholder="Password" class="w-full bg-slate-900 border border-slate-700 p-3 rounded mb-6">
+            <button class="w-full bg-blue-600 py-3 rounded-lg font-bold">Sign In</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+        // Chart Integration
+        new TradingView.widget({
+            "autosize": true, "symbol": "BINANCE:BTCUSDT", "interval": "D", "theme": "dark",
+            "style": "1", "locale": "en", "container_id": "tradingview_chart"
+        });
+
+        // Simple Routing
+        function showPage(pageId) {
+            document.querySelectorAll('.tab-content').forEach(p => p.classList.remove('active-tab'));
+            document.getElementById(pageId).classList.add('active-tab');
+        }
+    </script>
+</body>
+</html>
